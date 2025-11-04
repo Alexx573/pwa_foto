@@ -1,0 +1,46 @@
+        /* Oculta el contenedor de la cámara por defecto */
+        #cameraContainer {
+            display: none;
+        }
+
+        /* Estilo para el video */
+        video {
+            width: 100%; /* Hace que se ajusten al contenedor */
+            border-radius: 0.5rem; /* Bordes redondeados */
+            background-color: #343a40; /* Fondo oscuro para el video */
+            border: 2px solid #dee2e6; /* Borde sutil */
+        }
+
+        /* --- ESTILOS PARA LA GALERÍA --- */
+        
+        /* Contenedor principal de la galería */
+        #photoGalleryContainer {
+            overflow-x: auto; /* Habilita el scroll horizontal */
+            background-color: #f8f9fa; /* Fondo claro */
+            padding: 0.75rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            min-height: 140px; /* Altura mínima para que se vea el contenedor */
+        }
+
+        /* Contenedor interno que tendrá las imágenes */
+        #photoGallery {
+            display: flex; /* Alinea las imágenes en fila */
+            flex-wrap: nowrap; /* Evita que salten de línea */
+            gap: 0.75rem; /* Espacio entre fotos */
+        }
+
+        /* Estilo de cada foto en la galería */
+        #photoGallery img {
+            height: 120px; /* Altura fija para consistencia */
+            width: auto; /* Ancho automático para mantener proporción */
+            border-radius: 0.375rem; /* Bordes redondeados */
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        #photoGallery img:hover {
+            transform: scale(1.05);
+        }

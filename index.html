@@ -1,65 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi PWA de Fotos</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="manifest" href="manifest.json">
-    
     <meta name="theme-color" content="#4A90E2">
-    
-    <style>
-        /* Oculta el contenedor de la cámara por defecto */
-        /* tu app.js lo mostrará cuando sea necesario */
-        #cameraContainer {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body class="bg-light">
 
     <main class="container my-4">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8">
-                
+
                 <h1 class="text-center mb-4">PWA de Fotos</h1>
 
+                <!-- Controles principales -->
                 <div class="card shadow-sm mb-3">
                     <div class="card-body text-center">
-                        
+
+                        <!-- Botón para iniciar la cámara -->
                         <button id="openCamera" class="btn btn-primary btn-lg w-100 mb-3">
                             Abrir Cámara
                         </button>
-                        
+
+                        <!-- Contenedor del Video y Captura (Oculto) -->
                         <div id="cameraContainer">
-                            <video id="video" autoplay playsinline class="mb-2" width="320%" height="240"></video>
-                            
-                            <button id="takePhoto" class="btn btn-success btn-lg w-100">
-                                Tomar Foto
-                            </button>
+                            <!-- El video de la cámara -->
+                            <video id="video" autoplay playsinline class="mb-2"></video>
+
+                            <canvas id="canvas" class="d-none"></canvas>
+
+                            <!-- Fila de botones de acción -->
+                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                                <!-- Botón para tomar la foto -->
+                                <button id="takePhoto" class="btn btn-success btn-lg flex-grow-1">
+                                    Tomar Foto
+                                </button>
+
+                                <!-- Botón para cambiar cámara -->
+                                <button id="switchCameraBtn" class="btn btn-secondary btn-lg">
+                                    Girar
+                                </button>
+                            </div>
                         </div>
-                        
+
                     </div>
                 </div>
-                
+
+                <!-- Sección de Galería -->
                 <div class="card shadow-sm">
-                    <div class="card-header text-center fw-bold">
-                        Foto Capturada
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">Galería (Scroll Horizontal)</span>
+                        <!-- Botón para limpiar -->
+                        <button id="clearPhotosBtn" class="btn btn-danger btn-sm">
+                            Limpiar
+                        </button>
                     </div>
                     <div class="card-body">
-                        <canvas id="canvas" width="320%" height="240"></canvas>
+                        <!-- Contenedor de scroll -->
+                        <div id="photoGalleryContainer">
+                            <!-- Contenedor de imágenes -->
+                            <div id="photoGallery">
+                                <!-- Las imágenes se añadirán aquí con JS -->
+                            </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
     </main>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
+
+    <!-- 1. Carga de Bootstrap JS (Bundle) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!-- 2. Lógica del Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -73,8 +96,10 @@
             });
         }
     </script>
-    
+
+    <!-- 3. Carga de tu lógica de la cámara (app.js) -->
     <script src="app.js" defer></script>
-    
+
 </body>
+
 </html>
