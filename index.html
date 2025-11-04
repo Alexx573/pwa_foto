@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi PWA de Fotos</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link rel="manifest" href="manifest.json">
+    
+    <meta name="theme-color" content="#4A90E2">
+    
+    <style>
+        /* Oculta el contenedor de la cámara por defecto */
+        /* tu app.js lo mostrará cuando sea necesario */
+        #cameraContainer {
+            display: none;
+        }
+
+        /* Estilo para el video y el canvas */
+        video, canvas {
+            width: 100%; /* Hace que se ajusten al contenedor */
+            border-radius: 0.5rem; /* Bordes redondeados */
+            background-color: #343a40; /* Fondo oscuro para el video */
+            border: 2px solid #dee2e6; /* Borde sutil */
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <main class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                
+                <h1 class="text-center mb-4">PWA de Fotos</h1>
+
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body text-center">
+                        
+                        <button id="openCamera" class="btn btn-primary btn-lg w-100 mb-3">
+                            Abrir Cámara
+                        </button>
+                        
+                        <div id="cameraContainer">
+                            <video id="video" autoplay playsinline class="mb-2"></video>
+                            
+                            <button id="takePhoto" class="btn btn-success btn-lg w-100">
+                                Tomar Foto
+                            </button>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="card shadow-sm">
+                    <div class="card-header text-center fw-bold">
+                        Foto Capturada
+                    </div>
+                    <div class="card-body">
+                        <canvas id="canvas" width="320" height="240"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registrado con éxito:', registration);
+                    })
+                    .catch(error => {
+                        console.error('Error al registrar el Service Worker:', error);
+                    });
+            });
+        }
+    </script>
+    
+    <script src="app.js" defer></script>
+    
+</body>
+</html>
